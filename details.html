@@ -60,10 +60,36 @@
 											<a href="discord.html" class="special">Join us</a>
 										</article>
 										<article>
-											
+											<script>
+											function copyToClipboard(text) {
+    if (window.clipboardData && window.clipboardData.setData) {
+        // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+        return window.clipboardData.setData("Text", text);
+
+    }
+    else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        }
+        catch (ex) {
+            console.warn("Copy to clipboard failed.", ex);
+            return false;
+        }
+        finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+											</script>
 											<a href="#" class="image"><img src="content/fact.png" alt="" /></a>
 											<h3 class="major">Server IP</h3>
 											<p>You can connect to the server with the IP <strong>valiantmc.ml</strong></p>
+											<a copyToClipboard(valiantmc.ml) class="special">Copy</a>
 										</article>
 									</section>
 
